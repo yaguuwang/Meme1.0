@@ -190,8 +190,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        textField.text = textField.text?.uppercaseStringWithLocale(nil)
-        return true
+        //textField.text = textField.text?.uppercaseStringWithLocale(nil) // this way will leave the last charactor lowercase
+        textField.text = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string.uppercaseString)
+        return false
     }
     
     func generateMemeImage() -> UIImage {

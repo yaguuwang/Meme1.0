@@ -77,6 +77,7 @@
                             <constraint firstItem="sMf-8M-09n" firstAttribute="top" secondItem="Vcu-wT-5ra" secondAttribute="bottom" constant="40" id="9Kc-2a-hhm"/>
                             <constraint firstItem="m9c-pm-UKx" firstAttribute="trailing" secondItem="yJ0-i6-cL9" secondAttribute="trailing" id="Be2-9D-VZF"/>
                             <constraint firstItem="m9c-pm-UKx" firstAttribute="bottom" secondItem="sMf-8M-09n" secondAttribute="top" id="CS8-vO-AFS"/>
+                            <constraint firstItem="yJ0-i6-cL9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="DZ6-gX-a34"/>
                             <constraint firstItem="cLQ-Ng-C5u" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="104" id="UVv-l4-nuT"/>
                             <constraint firstItem="Vcu-wT-5ra" firstAttribute="trailing" secondItem="sMf-8M-09n" secondAttribute="trailing" id="W2M-ld-CRf"/>
                             <constraint firstItem="yJ0-i6-cL9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="20" id="WEJ-Sr-ogz"/>
@@ -93,6 +94,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="WEJ-Sr-ogz"/>
                                 <exclude reference="k2D-Cc-bsV"/>
                                 <exclude reference="h5G-Vf-qzN"/>
                             </mask>
