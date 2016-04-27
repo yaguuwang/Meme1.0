@@ -64,18 +64,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // launch image picking view
     @IBAction func albumButton(sender: AnyObject) {
-        let nextController = UIImagePickerController()
-        nextController.delegate = self
-        nextController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        let nextController = imagePickerFor(UIImagePickerControllerSourceType.PhotoLibrary)
         self.presentViewController(nextController, animated: true, completion: nil)
     }
     
     // launch camera
     @IBAction func cameraButton(sender: AnyObject) {
-        let nextController = UIImagePickerController()
-        nextController.delegate = self
-        nextController.sourceType = UIImagePickerControllerSourceType.Camera
+        let nextController = imagePickerFor(UIImagePickerControllerSourceType.Camera)
         self.presentViewController(nextController, animated: true, completion: nil)
+    }
+    
+    func imagePickerFor(sourceType: UIImagePickerControllerSourceType) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = sourceType
+        
+        return picker
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -145,10 +149,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func shareButton(sender: AnyObject) {
         let memeImage = generateMemeImage()
         let nextController = UIActivityViewController(activityItems: [memeImage], applicationActivities: nil)
-        self.presentViewController(nextController, animated: true, completion: {
-            action in
-            self.save()
-        })
+        self.presentViewController(nextController, animated: true, completion: nil)
+        nextController.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems:[AnyObject]?, error:NSError?) in
+            if !completed {
+                print("cancelled")
+            } else {
+                self.save()
+                print("memeImage saved")
+            }
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     
@@ -164,10 +174,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func keyboardWillAppear(notification: NSNotification) {
-        if topTextField.editing {
-            self.view.frame.origin.y = 0
-        } else {
-            self.view.frame.origin.y -= getHeightOfKeyboard(notification)
+        if bottomTextField.isFirstResponder() {
+            self.view.frame.origin.y = -getHeightOfKeyboard(notification)
         }
     }
     
